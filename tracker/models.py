@@ -33,6 +33,7 @@ class WeightEntry(models.Model):
     )
 
     date = models.DateField(
+        auto_now_add=True,
         validators=[validate_not_in_future],
         help_text="Enter the measurement's date"
     )
