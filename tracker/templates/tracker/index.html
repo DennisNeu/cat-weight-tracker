@@ -1,0 +1,34 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Weight</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in cats_with_weight %}
+            <tr>
+                <td>{{ entry.cat.name }}</td>
+                <td>
+                    {% if entry.last_weight %}
+                            {{ entry.last_weight.weight }} kg
+                        {% else %}
+                            No weight recorded
+                        {% endif %}
+                </td>
+                <td>
+                    {% if entry.last_weight %}
+                        {{ entry.last_weight.date }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
