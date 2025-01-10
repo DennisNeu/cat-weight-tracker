@@ -25,5 +25,5 @@ def cat_weights(request):
     return
 
 
-def new_weight_entry():
+def new_weightdjango_entry():
     return
