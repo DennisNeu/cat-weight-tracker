@@ -9,7 +9,7 @@ def index(request):
     cats_with_weight = [
         {
             'cat': cat,
-            'last_weight': cat.weight_entries.order_by('-date').first()
+            'last_weight': cat.weight_entries.order_by('date').last()
         }
         for cat in cats
     ]
@@ -25,5 +25,5 @@ def cat_weights(request):
     return
 
 
-def new_weightdjango_entry():
+def new_weight_entry():
     return
