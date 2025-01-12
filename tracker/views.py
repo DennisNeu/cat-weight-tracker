@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Cat
+from django.http import Http404
 # Create your views here.
 
 
@@ -21,9 +22,18 @@ def index(request):
         )
 
 
-def cat_weights(request):
-    return
+def cat_weights(request, cat_id):
+    try:
+        cat = Cat.objects.get(id=cat_id)
+    except Cat.DoesNotExist:
+        raise Http404("Cat does not exist")
+    
+    return render(
+        request,
+        'tracker/weights.html',
+        {"cat": cat}
+    )
 
 
-def new_weight_entry():
+def new_weight_entry(request):
     return
