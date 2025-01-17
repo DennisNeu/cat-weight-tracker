@@ -27,7 +27,7 @@ def cat_weights(request, cat_id):
         cat = Cat.objects.get(id=cat_id)
     except Cat.DoesNotExist:
         raise Http404("Cat does not exist")
-    
+
     return render(
         request,
         'tracker/weights.html',
