@@ -3,6 +3,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from .validators import validate_not_in_future
+from .managers import WeightEntryManager
+
 # Create your models here.
 
 
@@ -35,6 +37,8 @@ class WeightEntry(models.Model):
         # Allows accessing a cat's weight entries as `cat.weight_entries`
         related_name="weight_entries"
     )
+
+    objects = WeightEntryManager()
 
     date = models.DateField(auto_now_add=True)
     weight = models.FloatField(
