@@ -25,13 +25,18 @@ def index(request):
 def cat_weights(request, cat_id):
     try:
         cat = Cat.objects.get(id=cat_id)
+        weight_entries = cat.weight_entries.order_by('date')
     except Cat.DoesNotExist:
         raise Http404("Cat does not exist")
 
     return render(
         request,
         'tracker/weights.html',
-        {"cat": cat}
+        {
+            'cat': cat,
+            'weight_entries': weight_entries,
+        }
+
     )
 
 
