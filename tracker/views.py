@@ -40,5 +40,5 @@ def cat_weights(request, cat_id):
     )
 
 
-def new_weight_entry(request):
-    return
+def new_weight_entry(request, cat_id):
+    return render()
