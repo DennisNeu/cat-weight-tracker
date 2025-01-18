@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from .models import Cat
 from .forms import WeightEntryForm
@@ -42,13 +42,19 @@ def cat_weights(request, cat_id):
 
 
 def new_weight_entry(request, cat_id):
+    cat = get_object_or_404(Cat, id=cat_id)
+
     if request.method == "POST":
         form = WeightEntryForm(request.POST)
         if form.is_valid():
             form.save()  # Automatically saves data to db
-            return redirect()
+            return redirect('tracker:index')
 
     else:
-        form = WeightEntryForm()
+        form = WeightEntryForm(initial={'cat': cat})
 
-    return render(request, 'new_weight.html', {'form': form})
+    return render(
+        request,
+        'tracker/new_weight.html',
+        {'form': form, 'cat': cat}
+        )

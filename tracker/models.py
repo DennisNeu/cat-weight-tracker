@@ -1,5 +1,5 @@
 """Django models, declares data"""
-
+from datetime import date
 from django.db import models
 from django.core.validators import MinValueValidator
 from .validators import validate_not_in_future
@@ -40,11 +40,11 @@ class WeightEntry(models.Model):
 
     objects = WeightEntryManager()
 
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(("Date"), default=date.today)
     weight = models.FloatField(
         validators=[MinValueValidator(0.0)],
         help_text="Enter a positive number (in kg)"
     )
 
     def __str__(self):
-        return f"Weight: {self.weight} kg on {self.date} for {self.cat.name}"
+        return f"{self.weight}kg on {self.date}"
