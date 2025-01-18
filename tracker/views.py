@@ -41,4 +41,12 @@ def cat_weights(request, cat_id):
 
 
 def new_weight_entry(request, cat_id):
-    return render()
+    cats = Cat.objects.all()
+
+    return render(
+        request,
+        'tracker/new_weight.html',
+        {
+         'cats': cats
+        }
+    )
