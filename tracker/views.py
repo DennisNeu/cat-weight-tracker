@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from .models import Cat
+from django.shortcuts import render, redirect
 from django.http import Http404
+from .models import Cat
+from .forms import WeightEntryForm
 # Create your views here.
 
 
@@ -41,12 +42,13 @@ def cat_weights(request, cat_id):
 
 
 def new_weight_entry(request, cat_id):
-    cats = Cat.objects.all()
+    if request.method == "POST":
+        form = WeightEntryForm(request.POST)
+        if form.is_valid():
+            form.save()  # Automatically saves data to db
+            return redirect()
 
-    return render(
-        request,
-        'tracker/new_weight.html',
-        {
-         'cats': cats
-        }
-    )
+    else:
+        form = WeightEntryForm()
+
+    return render(request, 'new_weight.html', {'form': form})
